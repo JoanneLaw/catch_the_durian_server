@@ -1,4 +1,4 @@
-# catch_the_durian_server
+# Catch the Durian Server
 Server code for Catch the Durian mobile game project.
 
 ## Setup
