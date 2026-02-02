@@ -18,7 +18,7 @@ Handles player data, missions, and game progression.
 
 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/catch-the-durian-server.git
+git clone https://github.com/JoanneLaw/catch-the-durian-server.git
 cd catch-the-durian-server
 ```
 
