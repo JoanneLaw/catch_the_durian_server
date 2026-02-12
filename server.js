@@ -89,10 +89,15 @@ app.post("/claimMission", async (req, res) => {
                         player.totalMissionCompleted += 1;
                         await player.save();
                         console.log(`mission reward claimed! ${player}`);
+                        res.json({ status: PlayerActionStatus.SUCCESS, data: player });
+                    } else {
+                        console.log(`mission not completed yet!`);
+                        res.json({ status: PlayerActionStatus.FAILED });
                     }
+                } else {
+                    res.json({ status: PlayerActionStatus.FAILED });
                 }
             }
-            res.json({ status: PlayerActionStatus.SUCCESS, data: player });
         }
     } catch (e) {
         res.json({ status: PlayerActionStatus.FAILED });
