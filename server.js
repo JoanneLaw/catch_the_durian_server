@@ -39,6 +39,7 @@ const MissionSchema = new mongoose.Schema({
 
 const PlayerSchema = new mongoose.Schema({
     playerId: String,
+    playerName: String,
     highScore: Number,
     gem: Number,
     totalMissionCompleted: Number,
@@ -99,6 +100,22 @@ app.post("/claimMission", async (req, res) => {
     }
 });
 
+// Update player name
+app.post("/updatePlayerName", async (req, res) => {
+    try {
+        const data = req.body;
+        const player = await Player.findOneAndUpdate(
+            { playerId: data.playerId },
+            { playerName: data.playerName },
+            { new: true }
+        );
+        res.json({ status: PlayerActionStatus.SUCCESS, data: player});
+    } catch (e) {
+        res.json({ status: PlayerActionStatus.FAILED });
+        console.log(`Update player name failed: `, e);
+    }
+});
+
 // Save or update player data
 app.post("/savePlayerData", async (req, res) => {
     try {
@@ -126,6 +143,7 @@ app.post("/loadPlayerData", async (req, res) => {
         } else {
             const newPlayer = new Player();
             newPlayer.playerId = newPlayer._id;
+            newPlayer.playerName = "";
             newPlayer.highScore = 0;
             newPlayer.gem = 0;
             newPlayer.totalMissionCompleted = 0;
